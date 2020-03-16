@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/my/my",
+    "pages/home/home",
+    "pages/index/index",
+    "pages/sold/sold"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "HUST爱读书！",
+    "backgroundColor": "#ffffff",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#ffffff",
+    "selectedColor": "#badc58",
+    "list": [
+    {
+      "pagePath": "pages/home/home",
+      "text": "集市",
+      "iconPath": "images/home1.png",
+      "selectedIconPath": "images/home2.png"
+    },
+    {
+      "pagePath": "pages/sold/sold",
+      "text": "售书",
+      "iconPath": "images/sold1.png",
+      "selectedIconPath": "images/sold2.png"
+    },
+    {
+      "pagePath": "pages/my/my",
+      "text": "我的",
+      "iconPath": "images/my1.png",
+      "selectedIconPath": "images/my2.png"
+    }
+  ]
+  }
+}
