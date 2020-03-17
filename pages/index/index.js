@@ -18,26 +18,45 @@ Page({
     console.log("点击了同意授权");
     wx.login({
       success: function (res) {
-        if (res.code) {
-          wx.request({
-            url: '',
-            data: {
-              code: res.code,
-              nickName: info.detail.userInfo.nickName,
-              city: info.detail.userInfo.city,
-              province: info.detail.userInfo.province,
-              avatarUrl: info.detail.userInfo.avatarUrl
+        if (res.openid) {
+          // wx.request({
+          //   url: '',
+          //   data: {
+          //     code: res.code,
+          //     nickName: info.detail.userInfo.nickName,
+          //     city: info.detail.userInfo.city,
+          //     province: info.detail.userInfo.province,
+          //     avatarUrl: info.detail.userInfo.avatarUrl
+          //   },
+          //   header: {
+          //     'content-type': 'application/json' // 默认值
+          //   },
+          //   success: function (res) {
+          //     var userinfo = {};
+          //     userinfo['id'] = res.data.id;
+          //     userinfo['nickName'] = info.detail.userInfo.nickName;
+          //     userinfo['avatarUrl'] = info.detail.userInfo.avatarUrl;
+          //     wx.setStorageSync('userinfo', userinfo);
+          //   }
+          // })
+          //因为用云开发，所以不用wx.request,转而调用云函数
+          wx.cloud.callFunction({
+            name: 'getopenid',
+            data:{
+               openid:openid,
+               nickName: info.detail.userInfo.nickName,
+               city: info.detail.userInfo.city,
+               province: info.detail.userInfo.province,
+               avatarUrl: info.detail.userInfo.avatarUrl
             },
-            header: {
-              'content-type': 'application/json' // 默认值
-            },
+            header: { 'content-type': 'application/json'},
             success: function (res) {
-              var userinfo = {};
-              userinfo['id'] = res.data.id;
-              userinfo['nickName'] = info.detail.userInfo.nickName;
-              userinfo['avatarUrl'] = info.detail.userInfo.avatarUrl;
-              wx.setStorageSync('userinfo', userinfo);
-            }
+               var userinfo = {};
+               userinfo['id'] = res.data.openid;
+               userinfo['nickName'] = info.detail.userInfo.nickName;
+               userinfo['avatarUrl'] = info.detail.userInfo.avatarUrl;
+               wx.setStorageSync('userinfo', userinfo);
+             }
           })
           function gotoHome() {
             wx.reLaunch({
