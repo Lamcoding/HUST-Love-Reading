@@ -39,6 +39,12 @@ Page({
               wx.setStorageSync('userinfo', userinfo);
             }
           })
+          function gotoHome() {
+            wx.reLaunch({
+              url: '../home/home'
+            })
+          }
+          gotoHome();
         } else {
           console.log("授权失败");
         }
@@ -48,12 +54,7 @@ Page({
   } else {
     console.log("点击了拒绝授权");
   }
-} ,
-  gotoHome:function(){
-    wx.reLaunch({
-      url: '../home/home'
-    })
-  },
+ } ,
 
   /**
    * 生命周期函数--监听页面加载

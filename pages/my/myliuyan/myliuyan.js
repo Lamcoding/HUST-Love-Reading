@@ -1,42 +1,18 @@
-// pages/my/my.js
+// pages/my/myliuyan/myliuyan.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+
   },
-  a:function(){
-    wx.navigateTo({
-      url: 'myfavorite/myfavorite',
-    })
-  },
-  b:function(){
-    wx.navigateTo({
-      url: 'myliuyan/myliuyan',
-    })
-  },
-  c:function(){
-    wx.navigateTo({
-      url: 'mythumbsup/mythumbsup',
-    })
-  },
-  d:function(){
-    wx.navigateTo({
-      url: 'mycomment/mycomment',
-    })
-  },
-  e:function(){
-    wx.navigateTo({
-      url: 'mybook/mybook',
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
   /**

@@ -1,5 +1,38 @@
 <!--pages/my/my.wxml-->
 <!-- https://www.jianshu.com/p/431d65fc719f拿来用 -->
-<view class="top1">
-  <text></text>
+<view class="container">
+  <view class="userinfo">
+    <view class="useravatar">
+      <open-data type="userAvatarUrl"></open-data>
+    </view>
+    <open-data type="userNickName"></open-data>
+  </view>
+  <view class="separate"></view>
+  <view class="person-list">
+    <view class="list-item" bindtap="a">
+      <image class="item-image" src="/images/myfavorite.png"></image>
+      <text class="item-text">我的收藏</text>
+    </view>
+  <view class="person-line"></view>
+    <view class="list-item" bindtap="b">
+      <image class="item-image" src="/images/myliuyan.png"></image>
+      <text class="item-text">我的留言</text>
+    </view>
+  <view class="person-line"></view>
+    <view class="list-item" bindtap="c">
+      <image class="item-image" src="/images/mythumbsup.png"></image>
+      <text class="item-text">我的点赞</text>
+    </view>
+  <view class="person-line"></view>
+    <view class="list-item" bindtap="d">
+      <image class="item-image" src="/images/mycomment.png"></image>
+      <text class="item-text">我的评论</text>
+    </view>
+    <view class="person-line"></view>
+    <view class="list-item" bindtap="e">
+      <image class="item-image" src="/images/mybook.png"></image>
+      <text class="item-text">我的图书</text>
+    </view>
+  </view>
+  <view class="separate"></view>
 </view>

@@ -1,5 +1,4 @@
 {
   "usingComponents": {},
-
-  "navigationstyle":"custom"
+  "navigationBarTitleText": "我的"
 }
