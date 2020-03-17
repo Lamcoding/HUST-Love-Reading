@@ -15,7 +15,7 @@
 		"scopeDataCheck": false
 	},
 	"compileType": "miniprogram",
-	"cloudfunctionRoot": "./cloudfunctions/",
+	"cloudfunctionRoot": "cloudfunctions/",
 	"libVersion": "2.10.3",
 	"appid": "wx5a9259d00ad9225e",
 	"projectname": "%E7%88%B1%E8%AF%BB%E4%B9%A6",
