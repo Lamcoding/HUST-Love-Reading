@@ -5,12 +5,8 @@ cloud.init()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const wxContext = cloud.getWXContext()
-
+  res = wx.cloud.database().collection('book').get();
   return {
-    event,
-    openid: wxContext.OPENID,
-    appid: wxContext.APPID,
-    unionid: wxContext.UNIONID,
+    res
   }
 }

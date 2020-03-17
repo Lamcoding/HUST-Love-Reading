@@ -64,15 +64,22 @@ console.log(new Search(book).search("与"));
 
 function searching() {
     // 1. 获取数据库引用
-    const db = wx.cloud.database()
-    var book = null;
-    db.collection('books').get({
-        success: function (res) {
-            book = res;
-            //注意：我需要返回的res跟此文件夹当中的book.json类型一致
-            //为list，当中元素为dict！！
-            //请后端同学注意！
-        }
+    // const db = wx.cloud.database()
+    // var book = null;
+    // db.collection('books').get({
+    //     success: function (res) {
+    //         book = res;
+    //         //注意：我需要返回的res跟此文件夹当中的book.json类型一致
+    //         //为list，当中元素为dict！！
+    //         //请后端同学注意！
+    //     }
+    // })
+    var book;
+    wx.cloud.callFunction({
+      name: 'searchbook',
+      success:function(res){
+        book = res ;
+      }
     })
     return new Search(book);
 }
