@@ -1,1 +1,60 @@
 /* pages/home/home.wxss */
+.container{
+  width: 100%;
+  height: 100vh;
+}
+.top{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 20vh;
+  width: 100%;
+  background-color: whitesmoke;
+}
+.search{
+  display: flex;
+  flex-direction: row;
+   justify-content:space-between;
+  align-items: center;
+  width:70%;
+  height:60rpx;
+  background-color:white;
+  margin-top: 5%;
+  border:1rpx solid white;
+  border-radius: 5rpx;
+}
+.search input
+{
+  font-size:27rpx;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-left:30rpx; 
+}
+.search image
+{ 
+  width:40rpx;
+  height:40rpx;
+  padding-right:20rpx;
+}
+.select{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.left_select,.right_select{
+  width: 50%;
+  display: flex;
+  align-items: flex-end;
+  align-content: flex-end;
+}
+.explain{
+  bottom: 0px;
+  background-color:rgb(120, 224, 143);
+  border-radius: 10%;
+  border: 1px solid rgb(120, 224, 143);
+  margin: 20rpx;
+  width: 80rpx;
+  color: white;
+  letter-spacing: 2px;
+  text-align: center;
+}

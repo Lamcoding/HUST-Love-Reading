@@ -10,4 +10,3 @@
   </swiper>
   <button class="login_button" open-type="getUserInfo" bindgetuserinfo="getMyInfo" bindtap="gotoHome">授权登录</button>
 </view>
-  <button class="login_button" open-type="getUserInfo" bindgetuserinfo="getMyInfo" bindtap="gotoHome">授权登录</button>

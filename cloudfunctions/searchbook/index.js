@@ -30,7 +30,10 @@ class Search {
     let sorted = [];
     for (let i = 0; i < score.length; i++) {
       if (score[i]['s'] < 0) {
-        sorted.push({ 'id': score[i]['id'], 'name': score[i]['name'] });
+        sorted.push({
+          'id': score[i]['id'],
+          'name': score[i]['name']
+        });
       }
     }
     return sorted;
@@ -49,12 +52,26 @@ class Search {
     }
   }
 }
+
+
 // 云函数入口函数
 exports.main = async (event, context) => {
-  res = wx.cloud.database().collection('book').get();
-  info = new Search(res);
-  return {
-    id: info.id,
-    name: info.name
-  }
+  res = wx.cloud.database().collection('books').get();
+  info = new Search(res).search(event.inputvalue);
+  return info;
+}
+
+function search_keyword(arg) {
+  return wx.cloud.callFunction({
+    // 云函数名称
+    name: "searchbook",
+    // 传给云函数的参数
+    data: {
+      a: arg,
+    },
+    success: function (res) {
+      console.log(res)
+    },
+    fail: console.error
+  });
 }
