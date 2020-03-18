@@ -1,20 +1,20 @@
 <!--pages/home/home.wxml-->
 <text>pages/home/home.wxml</text>
 <view class="container">
-  <view class="top">
-    <view class="search">
-      <input type="text" placeholder="搜索书籍" confirm-type="search" value="{{inputvalue}}" bindinput="inputBind" bindconfirm="push"/>
-      <image class="searchImg" src="/images/search.png"></image>
-    </view>
-    <view class="select">
-      <view class="left_select">
-        <view class="explain"> 类别</view>
-        <view></view>
-      </view>
-      <view class="right_select">
-        <view class="explain"> 地址</view>
-        <view></view>
-      </view>
-    </view>
-  </view>
+	<view class="top">
+		<view class="search">
+			<input type="text" placeholder="搜索书籍" confirm-type="search" value="{{inputvalue}}" bindinput="inputBind" bindconfirm="push" />
+			<image class="searchImg" src="/images/search.png"></image>
+		</view>
+		<view class="select">
+			<view class="left_select">
+				<view class="explain"> 类别</view>
+				<view></view>
+			</view>
+			<view class="right_select">
+				<view class="explain"> 地址</view>
+				<view></view>
+			</view>
+		</view>
+	</view>
 </view>

@@ -68,7 +68,7 @@ Page({
              * 根据关键词 跳转到 search搜索页面
              */
             wx.navigateTo({
-              url: '',
+              url: 'search/search'
             })
           }
         }

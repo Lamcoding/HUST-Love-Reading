@@ -59,19 +59,8 @@ exports.main = async (event, context) => {
   res = wx.cloud.database().collection('books').get();
   info = new Search(res).search(event.inputvalue);
   return info;
+  //info是一个列表
+  //返回值示例：[{"id":23,"name":"生如夏花"},{"id":"26","name":"高等数学"}]
+  //当未搜索到时返回：[]
 }
 
-function search_keyword(arg) {
-  return wx.cloud.callFunction({
-    // 云函数名称
-    name: "searchbook",
-    // 传给云函数的参数
-    data: {
-      a: arg,
-    },
-    success: function (res) {
-      console.log(res)
-    },
-    fail: console.error
-  });
-}

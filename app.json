@@ -8,7 +8,8 @@
     "pages/my/myliuyan/myliuyan",
     "pages/my/mythumbsup/mythumbsup",
     "pages/my/mycomment/mycomment",
-    "pages/my/mybook/mybook"
+    "pages/my/mybook/mybook",
+    "pages/home/search/search"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
@@ -43,5 +44,4 @@
     ]
   },
   "sitemapLocation": "sitemap.json"
-
 }
