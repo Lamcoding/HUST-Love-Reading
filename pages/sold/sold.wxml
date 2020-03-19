@@ -1,2 +1,36 @@
 <!--pages/sold/sold.wxml-->
-<text>pages/sold/sold.wxml</text>
+<view class="container">
+  <text>请输入详细信息</text>
+  <view class="picture">
+    <text>添加图片</text>
+    <input class="pic" placeholder="从相册选择" disabled="disabled"></input>
+    <image src="/images/picture.png" bindtap="chooseImg"></image>
+  </view>
+  <view class="title">
+    <text>书名</text>
+    <input class="ti" placeholder="请输入书籍名称" value="{{detail.title}}"></input>
+  </view>
+  <view class="price">
+    <text>价格</text>
+    <input class="pri" placeholder="请输入价格" value="{{detail.price}}"></input>
+  </view>
+  <view class="Selector">
+    <view class="select" id="select1">
+      <text>选择你的地址:</text>
+      <picker mode="selector" range="{{location}}" value="{{index1}}" bindchange="updateLocation" >
+        <text>{{location[index1]}}</text>
+      </picker>
+    </view>
+    <view class="select" id="select2">
+      <text>选择书籍类别:</text>
+      <picker mode="selector" range="{{type}}" value="{{index2}}" bindchange="updateType" >
+        <text>{{type[index2]}}</text>
+      </picker>
+    </view>
+  </view>
+  <view class="Summary">
+    <text>备注:</text>
+    <textarea class="sum" placeholder="可输入备注信息（不超过二十个字）" maxlength="21" value="{{detail.summary}}"></textarea>
+  </view>
+  <button bindtap="showmodal">确认信息</button>
+</view>

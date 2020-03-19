@@ -9,10 +9,12 @@ const db = wx.cloud.database()
 // 云函数入口函数，event为传入参数的集合
 //context 对象包含了此处调用的调用信息和运行状态，可以用它来了解服务运行的情况
 exports.main = async (event, context) => {
-  const wxContext = cloud.getWXContext().userInfo
-  return wx.getUserInfo({
-    success(res){
-      console.log(res.userInfo)
-    }
-  })
+  const wxContext = cloud.getWXContext()
+
+  return {
+    event,
+    openid: wxContext.OPENID,
+    appid: wxContext.APPID,
+    unionid: wxContext.UNIONID,
+  }
 }

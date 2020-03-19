@@ -5,6 +5,10 @@ Page({
    */
   data: {
     inputvalue:'',
+    location: ["不限地点","沁苑公寓", "韵苑公寓", "紫菘公寓"],
+    index1: 0,
+    type: ["不限类型","文学书籍", "理科书籍", "工科书籍", "社科书籍", "医学书籍", "其他书籍"],
+    index2: 0,
   },
   inputBind:function(e){
     this.setData({
@@ -12,24 +16,24 @@ Page({
     })
       console.log("输入数据为"+this.data.inputvalue)
   },
-  //调用搜索
   push:function(){
     var that = this
-    wx.cloud.callFunction({
-      name: 'searchbook',
+    wx.request({
+      url: '' + this.data.inputvalue + /0/,
       data: {
         inputvalue: this.data.inputvalue
       },
+      method: 'GET',
       success: function (res) {
-        console.log(res.result)
-        var searchData = res.result
+        console.log(res.data)
+        var searchData = res.data
         that.setData({
           searchData
         })
         wx.setStorage({
           key: 'searchLists',
           data: {
-            searchLists: res.result
+            searchLists: res.data
           }
         })
         /**
@@ -68,7 +72,7 @@ Page({
              * 根据关键词 跳转到 search搜索页面
              */
             wx.navigateTo({
-              url: 'search/search'
+              url: '',
             })
           }
         }

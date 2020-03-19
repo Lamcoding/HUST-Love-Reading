@@ -1,15 +1,14 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/home/home",
-    "pages/my/my",
     "pages/sold/sold",
+    "pages/my/my",
+    "pages/index/index",
     "pages/my/myfavorite/myfavorite",
     "pages/my/myliuyan/myliuyan",
     "pages/my/mythumbsup/mythumbsup",
     "pages/my/mycomment/mycomment",
-    "pages/my/mybook/mybook",
-    "pages/home/search/search"
+    "pages/my/mybook/mybook"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
@@ -44,4 +43,5 @@
     ]
   },
   "sitemapLocation": "sitemap.json"
+
 }

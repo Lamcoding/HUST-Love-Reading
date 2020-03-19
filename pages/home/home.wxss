@@ -48,13 +48,15 @@
   align-content: flex-end;
 }
 .explain{
-  bottom: 0px;
-  background-color:rgb(120, 224, 143);
+  background-color: #9DBBA8;
   border-radius: 10%;
-  border: 1px solid rgb(120, 224, 143);
+  border: 1px solid  #9DBBA8;
   margin: 20rpx;
   width: 80rpx;
   color: white;
   letter-spacing: 2px;
   text-align: center;
+}
+picker{
+  border: 1px solid whitesmoke;
 }
