@@ -1,14 +1,17 @@
 // pages/sold/sold.js
+let tempFilePaths=new Array()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    title:0,
+    price:0,
     location:["沁苑公寓","韵苑公寓","紫菘公寓"],
     index1:0,
     type: ["文学书籍","理科书籍","工科书籍","社科书籍","医学书籍","其他书籍"],
-    index2:0
+    index2:0,
   },
   chooseImg:function(){
     wx.chooseImage({
@@ -17,7 +20,7 @@ Page({
       sourceType: ['album', 'camera'],
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFilePaths
+         tempFilePaths = res.tempFilePaths
       }
     })
   },
@@ -48,8 +51,30 @@ showmodal:function(){
           icon:'success',
           duration:2000,
         });
+        //获取fileid
+        var fileid = new Array()
+        var user = wx.getStorageSync('userinfo')
+        for(var i=0;i<tempFilePaths.length;i++){
+          wx.cloud.uploadFile({
+            cloudPath: '/Books_image'+new Date().getTime()+user['openid']+'.png',
+            filePath:tempFilePaths[i],
+            fail:function(res){
+              fileid.push(res.fileID)
+              console.log("fileud",fileid)
+            }
+          })
+        }
+        console.log("?????",detail)
         wx.cloud.callFunction({
+          name: 'addbook',
           data:{
+          file_id: fileid,
+          name: res.title,
+          price: res.price,
+          note: res.summary,
+          type: res.index2,
+          location: res.index1,
+          user_id: user['_id']
             /*sold.js：  wx.showModel success后需要传给后台数据（表明商品发布成功）
 	传入的商品数据有：chooseImg中的tempFilePaths
 			detail.title
@@ -58,6 +83,10 @@ showmodal:function(){
 			location[index1]（也可只传入index1）
 			type[index2](也可只传入index2)
 			*/
+          },
+          success: function(res)
+          {
+            console.log(res)
           }
         })
         

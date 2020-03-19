@@ -51,7 +51,7 @@ class Search {
 }
 // 云函数入口函数
 exports.main = async (event, context) => {
-  res = wx.cloud.database().collection('book').get();
+  res = cloud.database().collection('book').get();
   info = new Search(res);
   return {
     id: info.id,
