@@ -60,3 +60,7 @@
 picker{
   border: 1px solid whitesmoke;
 }
+.empty{
+  height: 20vh;
+  width: 100%;
+}

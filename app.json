@@ -1,10 +1,11 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/detail/detail",
+    "pages/my/myfavorite/myfavorite",
     "pages/sold/sold",
     "pages/my/my",
     "pages/index/index",
-    "pages/my/myfavorite/myfavorite",
     "pages/my/myliuyan/myliuyan",
     "pages/my/mythumbsup/mythumbsup",
     "pages/my/mycomment/mycomment",
@@ -43,5 +44,4 @@
     ]
   },
   "sitemapLocation": "sitemap.json"
-
 }
