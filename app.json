@@ -22,8 +22,7 @@
   "tabBar": {
     "color": "#ffffff",
     "selectedColor": "#badc58",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/home/home",
         "text": "集市",
         "iconPath": "images/home1.png",

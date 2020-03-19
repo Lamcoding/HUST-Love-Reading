@@ -34,7 +34,7 @@ updateType:function(e){
     index2:e.detail.value,
   })
 },
-showmodal:function(){
+showmodal:function(e){
   wx.showModal({
     title: '确认出售？',
     content:'一旦确认无法更改',
@@ -58,22 +58,22 @@ showmodal:function(){
           wx.cloud.uploadFile({
             cloudPath: '/Books_image'+new Date().getTime()+user['openid']+'.png',
             filePath:tempFilePaths[i],
-            fail:function(res){
+            success:function(res){
               fileid.push(res.fileID)
-              console.log("fileud",fileid)
+              console.log("fileud",res.fileID)
             }
           })
         }
-        console.log("?????",detail)
+        console.log("?????",e.detail)
         wx.cloud.callFunction({
           name: 'addbook',
           data:{
           file_id: fileid,
-          name: res.title,
-          price: res.price,
-          note: res.summary,
-          type: res.index2,
-          location: res.index1,
+          name: e.detail.title,
+          price: e.detail.price,
+          note: e.detail.summary,
+          type: e.detail.index2,
+          location: e.detail.index1,
           user_id: user['_id']
             /*sold.js：  wx.showModel success后需要传给后台数据（表明商品发布成功）
 	传入的商品数据有：chooseImg中的tempFilePaths
