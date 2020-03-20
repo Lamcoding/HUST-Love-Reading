@@ -15,7 +15,7 @@
       <view class="Price">￥{{goods_info.price}}</view>
     </view>
     <view class="right">
-      <image bindtap="favorite" src="{{isClick?'/images/myfavorite.png':'/images/favoritepassive.png'}}"></image>
+      <image bindtap="favorite" src="{{favoriteimg}}"></image>
       <text>收藏</text>
     </view>
   <view class="user">

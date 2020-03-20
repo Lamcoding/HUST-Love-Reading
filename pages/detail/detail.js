@@ -1,5 +1,6 @@
 // pages/detail/detail.js
-let ID=''
+  let ID = '';
+  let isClick = false;
 Page({
 
   /**
@@ -24,7 +25,8 @@ Page({
       price: "30",
       userava: "/images/demo.jpeg",
       userid: "白银御行",
-      userlocation: "紫菘公寓"
+      userlocation: "紫菘公寓",
+      favoriteimg:'/images/favoritepassive.png',
     },
     //swiper相关
     indicatorDots: true,
@@ -34,21 +36,12 @@ Page({
     circular: true,
     goods: {}
   },
-  favorite: function() {
-    let goods = this.data.goods_info;
-    let isClick=this.data.isClick
-    if (!isClick) {
-      wx.setStorageSync(goods.id, goods);
-      this.setData({
-        isClick: true
-      })
-    } else {
-      wx.removeStorageSync(goods.id);
-      this.setData({
-        isClick: false
-      })
-    }
-    wx.cloud.callFunction({
+  favorite:function(){
+    this.setData({
+      favoriteimg: isClick ?'/images/favoritepassive.png':'/images/myfavorite.png'
+    })
+    isClick=!isClick;
+  wx.cloud.callFunction({
       name: "addfavorite",
       data: {
         id: ID,
@@ -73,10 +66,10 @@ Page({
     .get()
     .then(res=>{
       console.log("详情页请求成功",res)
-      isClick=res.data.isClick
       this.setData({
         detail:res.data
       })
+      isClick = res.data.isClick
     })
     .catch(res=>{
       console.log("详情页请求失败",res)
