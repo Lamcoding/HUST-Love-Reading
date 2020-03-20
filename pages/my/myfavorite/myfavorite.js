@@ -1,18 +1,20 @@
 // pages/my/myfavorite/myfavorite.js
 // import goods from 
+let isClick=false
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    detail: []
+    detail: [],
+    isclickdetail:[]
   },
   gotodetail: function(e) {
-    console.log("获取的数据",e)
-    // wx.navigateTo({
-    //   url: '/pages/detail/detail?id='+this.data.detail._id,
-    // })
+    console.log(e)
+    wx.navigateTo({
+      url: '/pages/detail/detail?id='+this.data.isclickdetail[e.currentTarget.dataset.index]._id,
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -26,6 +28,16 @@ Page({
           detail: detail
         })
         console.log(detail)
+        var isclickdetail=[]
+        for (var i = 0; i < detail.length; i++) {
+          // console.log("hello")
+          if (detail[i].isClick) {
+            isclickdetail.push(detail[i])
+          }
+        }
+        this.setData({
+          isclickdetail:isclickdetail
+        })
       })
       .catch(res => {
         console.log("请求失败", res);

@@ -1,4 +1,5 @@
 <!--pages/my/myfavorite/myfavorite.wxml-->
-<view class="myshoucang"wx:for="{{detail}}" wx:key="index">
-<view wx:if="{{item.isClick}}" bindtap="gotodetail"data-item="{{item}}"> 成功显示</view>
+<view class="myshoucang" bindtap="gotodetail" wx:for="{{isclickdetail}}" wx:key="index1" data-index="{{index}}">
+  成功显示
 </view>
+
