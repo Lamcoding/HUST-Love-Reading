@@ -1,12 +1,11 @@
 <!--pages/detail/detail.wxml-->
 <view class="container">
-  <swiper class="swiper" indicator-dots="{{indicatorDots}}"
-  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
-  <block wx:for="{{goods_info.picture}}">
-  <swiper-item>
-  <image src="{{item.img}}" mode='scaleToFill' class="slide-image"/>
-  </swiper-item>
-  </block>
+  <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
+    <block wx:for="{{goods_info.picture}}">
+      <swiper-item>
+        <image src="{{item.img}}" mode='scaleToFill' class="slide-image" />
+      </swiper-item>
+    </block>
   </swiper>
   <view class="goods">
     <view class="left">
@@ -18,10 +17,21 @@
       <image bindtap="favorite" src="{{favoriteimg}}"></image>
       <text>收藏</text>
     </view>
-  <view class="user">
-    <image src="{{goods_info.userava}}"></image>
-    <view class="Userid">{{goods_info.userid}}</view>
-    <view class="Userlocation">{{goods_info.userlocation}}</view>
+    <view class="user">
+      <image src="{{goods_info.userava}}"></image>
+      <view class="Userid">{{goods_info.userid}}</view>
+      <view class="Userlocation">{{goods_info.userlocation}}</view>
+    </view>
   </view>
+  <view class="line"></view>
+  <view class="comment">
+    <view class="commenthead">评论</view>
+    <view class="content1" wx:for="{{pinglun}}" wx:key="index">
+      <view>{{item.name}}</view>
+      <view>{{item.content}}</view>
+    </view>
+    <input placeholder="请输入内容" class="input" bindinput="getcontent" value="{{content}}"></input>
+    <button type="primary" bindtap="fabiao">发表评论</button>
   </view>
+
 </view>

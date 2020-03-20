@@ -1,13 +1,14 @@
 // pages/detail/detail.js
-  let ID = '';
-  let isClick = false;
+let ID = '';
+let isClick = false;
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    detail:'',
+    content: '',
+    pinglun: [],
+    detail: '',
     goods_info: {
       id: '123',
       picture: [{
@@ -26,7 +27,7 @@ Page({
       userava: "/images/demo.jpeg",
       userid: "白银御行",
       userlocation: "紫菘公寓",
-      favoriteimg:'/images/favoritepassive.png',
+      favoriteimg: '/images/favoritepassive.png',
     },
     //swiper相关
     indicatorDots: true,
@@ -36,18 +37,19 @@ Page({
     circular: true,
     goods: {}
   },
-  favorite:function(){
+  favorite: function() {
     this.setData({
-      favoriteimg: isClick ?'/images/favoritepassive.png':'/images/myfavorite.png'
+      favoriteimg: isClick ? '/images/favoritepassive.png' : '/images/myfavorite.png'
     })
-    isClick=!isClick;
-  wx.cloud.callFunction({
-      name: "addfavorite",
-      data: {
-        id: ID,
-        isClick: isClick
-      }
-    })
+    isClick = !isClick;
+    wx.cloud.callFunction({
+        name: "addfavorite",
+        data: {
+          action: "favorite",
+          id: ID,
+          isClick: isClick
+        }
+      })
       .then(res => {
         console.log("改变收藏状态成功", res)
       })
@@ -55,25 +57,63 @@ Page({
         console.log("改变收藏状态失败", res)
       })
   },
+  getcontent(event) {
+    this.setData({
+      content : event.detail.value
+    })
+
+    console.log("y用户输入的值", event)
+  },
+  fabiao() {
+    let newcontent = {}
+    let pinglunARR = this.data.pinglun
+    let content=this.data.content
+    newcontent.name = "王五"
+    newcontent.content = content
+    pinglunARR.push(newcontent)
+    wx.cloud.callFunction({
+        name: "addfavorite",
+        data: {
+          action: "comment",
+          id: ID,
+          pinglun: pinglunARR,
+        }
+      })
+      .then(res => {
+        console.log("评论成功", res)
+        this.setData({
+          pinglun: pinglunARR,
+          content:'',
+        })
+        wx.showToast({
+          title: '发表成功',
+        })
+      })
+      .catch(res => {
+        console.log("评论失败", res)
+      })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    ID=options.id
+    ID = options.id
     console.log("详情页接受的id", ID)
     wx.cloud.database().collection('homelist')
-    .doc(ID)
-    .get()
-    .then(res=>{
-      console.log("详情页请求成功",res)
-      this.setData({
-        detail:res.data
+      .doc(ID)
+      .get()
+      .then(res => {
+        console.log("详情页请求成功", res)
+        this.setData({
+          detail: res.data,
+          favoriteimg: isClick ? '/images/favoritepassive.png' : '/images/myfavorite.png',
+          pinglun: res.data.plugin
+        })
+        isClick = res.data.isClick
       })
-      isClick = res.data.isClick
-    })
-    .catch(res=>{
-      console.log("详情页请求失败",res)
-    })
+      .catch(res => {
+        console.log("详情页请求失败", res)
+      })
 
 
 
