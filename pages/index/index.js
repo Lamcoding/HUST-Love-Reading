@@ -64,7 +64,7 @@ Page({
             name: "getopenid",
             success: function (res) {
               let hh = res
-              console.log(hh)
+              console.log("getopenid返回",hh)
               wx.cloud.callFunction({
                 name: "pushuserinfo",
                 data: {
@@ -73,15 +73,15 @@ Page({
                   nickname: info.userInfo.nickName,
                 },
                 success: function (h) {
-                 // console.log(h.result.data[0]._id)
+                  console.log(h)
                   var userinfo = {};
-                  userinfo['_id'] = h.result.data[0]._id;
+                  userinfo['_id'] = h.result._id;
                   userinfo['openid'] = hh.result.openid;
                   userinfo['nickName'] = info.userInfo.nickName;
                   userinfo['avatarUrl'] = info.userInfo.avatarUrl;
                   wx.setStorageSync('userinfo', userinfo);
-                  console.log(userinfo);
-                }
+                  console.log("userinfo缓存",userinfo);
+                },
               })
               
             }

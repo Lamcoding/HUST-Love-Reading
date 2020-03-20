@@ -1,7 +1,7 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init()
+cloud.init("env: dinger-3lqz8")
 //以下为该函数的调用方法
 // cloud.callFunction({
 //   name:'addbook',
@@ -24,7 +24,7 @@ exports.main = async (event, context) => {
   const db= cloud.database()
   //books表插入新记录后返回的唯一标识_id
   try {
-    return await db.collection('books').add({
+    return await db.collection('bookdata').add({
       data: {
         file_id: event.file_id,
         name: event.name,
@@ -34,17 +34,14 @@ exports.main = async (event, context) => {
         location: event.location,
         user_id: event.user_id,
       },
-      success: function (res) {
-        db.collection('users').doc(event.user_id).update({
-          data: {
-            book_id: _.push(res._id)
-          }
-        })
-      }
+     success: function (res) {
+       console.log(res)
+      },
+      fail: function(res) {
+        console.log(res)
+      },
     })
-  } catch (e) {
-    console.error(e)
-  }
+  } catch (e) {}
   // //在users表中更新book_id，
   // db.collection('users').doc(event._id).update({
   //   data: {

@@ -1,5 +1,5 @@
 // pages/sold/sold.js
-let tempFilePaths=new Array()
+var tempFilePaths=new Array()
 Page({
 
   /**
@@ -34,7 +34,8 @@ updateType:function(e){
     index2:e.detail.value,
   })
 },
-showmodal:function(e){
+showmodal:function(){
+  let that = this
   wx.showModal({
     title: '确认出售？',
     content:'一旦确认无法更改',
@@ -53,42 +54,81 @@ showmodal:function(e){
         });
         //获取fileid
         var fileid = new Array()
+        var book_id
+        console.log(tempFilePaths)
         var user = wx.getStorageSync('userinfo')
-        for(var i=0;i<tempFilePaths.length;i++){
+        tempFilePaths.forEach((item,index) => {
           wx.cloud.uploadFile({
-            cloudPath: '/Books_image'+new Date().getTime()+user['openid']+'.png',
-            filePath:tempFilePaths[i],
-            success:function(res){
-              fileid.push(res.fileID)
-              console.log("fileud",res.fileID)
+            cloudPath: 'Books_image/' + new Date().getTime() + user['openid'] + index + '.png',
+            filePath: item,
+          }).then(function(res){
+            fileid.push(res.fileID)
+            if(index == tempFilePaths.length - 1)
+            {
+              console.log("fileid",fileid)
+              wx.cloud.callFunction({
+                name: 'addbook',
+                data: {
+                  file_id: fileid,
+                  name: that.data.title,
+                  price: that.data.price,
+                  note: that.data.summary,
+                  type: that.data.type[that.data.index2],
+                  location: that.data.location[that.data.index1],
+                  user_id: user['_id'],
+                }
+              }).then(res => {
+                console.log("addbook返回", res.result._id)
+                wx.cloud.callFunction({
+                  name: 'addbook_1',
+                  data: {
+                    openid: user['openid'],
+                    book_id: res.result._id
+                  }
+                }).then(res => {
+                  console.log("addbook_1返回",res)
+                })
+              }).catch(err => {
+                // handle error
+              })
             }
           })
-        }
-        console.log("?????",e.detail)
-        wx.cloud.callFunction({
-          name: 'addbook',
-          data:{
-          file_id: fileid,
-          name: e.detail.title,
-          price: e.detail.price,
-          note: e.detail.summary,
-          type: e.detail.index2,
-          location: e.detail.index1,
-          user_id: user['_id']
-            /*sold.js：  wx.showModel success后需要传给后台数据（表明商品发布成功）
-	传入的商品数据有：chooseImg中的tempFilePaths
-			detail.title
-			detail.price
-      detail.summary
-			location[index1]（也可只传入index1）
-			type[index2](也可只传入index2)
-			*/
-          },
-          success: function(res)
-          {
-            console.log(res)
-          }
         })
+  //       for(let i=0;i<tempFilePaths.length;i++){
+  //         wx.cloud.uploadFile({
+  //           cloudPath: 'Books_image/'+new Date().getTime()+user['openid']+'.png',
+  //           filePath:tempFilePaths[i],
+  //           complete:function(res){
+  //             fileid.push(res.fileID)
+  //            console.log("fileud",i)
+  //           }
+  //         })
+  //       }
+  //       console.log("?????",fileid)
+  //       wx.cloud.callFunction({
+  //         name: 'addbook',
+  //         data:{
+  //         file_id: [fileid],
+  //         name: that.data.title,
+  //         price:that.data.price,
+  //         note:that.data.summary,
+  //         type: that.data.type[that.data.index2],
+  //         location:that.data.location[that.data.index1],
+  //         user_id: user['_id']
+  //           /*sold.js：  wx.showModel success后需要传给后台数据（表明商品发布成功）
+	// 传入的商品数据有：chooseImg中的tempFilePaths
+	// 		detail.title
+	// 		detail.price
+  //     detail.summary
+	// 		location[index1]（也可只传入index1）
+	// 		type[index2](也可只传入index2)
+	// 		*/
+  //         },
+  //         success: function(res)
+  //         {
+  //           console.log(res)
+  //         }
+  //       })
         
       }
       else if(res.cancel){

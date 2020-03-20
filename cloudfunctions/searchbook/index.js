@@ -56,7 +56,6 @@ class Search {
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-<<<<<<< HEAD
   res = cloud.database().collection('books').get();
   info = new Search(res);
   return {
@@ -64,13 +63,3 @@ exports.main = async (event, context) => {
     name: info.name
   }
 }
-=======
-  res = wx.cloud.database().collection('books').get();
-  info = new Search(res).search(event.inputvalue);
-  return info;
-  //info是一个列表
-  //返回值示例：[{"id":23,"name":"生如夏花"},{"id":"26","name":"高等数学"}]
-  //当未搜索到时返回：[]
-}
-
->>>>>>> 613d6bcfe31cd3a55c26878bbafe6bdffa9636b1

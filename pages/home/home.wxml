@@ -2,23 +2,27 @@
 <view class="container">
   <view class="top">
     <view class="search">
-      <input type="text" placeholder="搜索书籍" confirm-type="search" value="{{inputvalue}}" bindinput="inputBind" bindconfirm="push"/>
+      <input type="text" placeholder="搜索书籍" confirm-type="search" value="{{inputvalue}}" bindinput="inputBind" bindconfirm="push" />
       <image class="searchImg" src="/images/search.png"></image>
     </view>
     <view class="select">
       <view class="left_select">
         <view class="explain"> 类别</view>
-        <picker mode="selector" range="{{type}}" value="{{index2}}" bindchange="updateType" >
-        <text>{{type[index2]}}</text>
-      </picker>
+        <picker mode="selector" range="{{type}}" value="{{index2}}" bindchange="updateType">
+          <text>{{type[index2]}}</text>
+        </picker>
       </view>
       <view class="right_select">
         <view class="explain"> 地址</view>
-        <picker mode="selector" range="{{location}}" value="{{index1}}" bindchange="updateLocation" >
-        <text>{{location[index1]}}</text>
-      </picker>
+        <picker mode="selector" range="{{location}}" value="{{index1}}" bindchange="updateLocation">
+          <text>{{location[index1]}}</text>
+        </picker>
       </view>
     </view>
   </view>
-  
+  <view class="empty"></view>
+  <view class="itemroot" wx:for="{{datalist}}" wx:key="index1" bindtap="gotodetail" data-item="{{item}}">
+    <text>{{item.title}}</text>
+    <text>{{item.des}}</text>
+  </view>
 </view>

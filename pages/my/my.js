@@ -17,7 +17,12 @@ Page({
       url: 'myliuyan/myliuyan',
     })
   },
-  c:function(){
+  // c:function(){
+  //   wx.navigateTo({
+  //     url: 'mythumbsup/mythumbsup',
+  //   })
+  // },
+  c: function () {
     wx.navigateTo({
       url: 'mythumbsup/mythumbsup',
     })

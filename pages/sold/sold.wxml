@@ -8,11 +8,11 @@
   </view>
   <view class="title">
     <text>书名</text>
-    <input class="ti" placeholder="请输入书籍名称" value="{{detail.title}}"></input>
+    <input class="ti" placeholder="请输入书籍名称" value="{{title}}"></input>
   </view>
   <view class="price">
     <text>价格</text>
-    <input class="pri" placeholder="请输入价格" value="{{detail.price}}"></input>
+    <input class="pri" placeholder="请输入价格" value="{{price}}"></input>
   </view>
   <view class="Selector">
     <view class="select" id="select1">

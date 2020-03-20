@@ -1,4 +1,5 @@
 // pages/my/myfavorite/myfavorite.js
+// import goods from 
 Page({
 
   /**
@@ -12,6 +13,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(wx.getStorageSync("goodsid"));
+    // let savejob = wx.getStorageSync('jobData')//获得缓存
+    // let index = savejob.length - 1;
+    // console.log(savejob[index].id);
+    // let jobid = savejob[index].id
+    // let temp = jobList[jobid] //将获得缓存后匹配的数据放入新的数组
+    // let job = [];
+    // job.push(temp);
+    // this.setData({
+    //   id: index,
+    //   job: job,
+    // })
 
   },
 

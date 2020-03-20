@@ -9,8 +9,9 @@ Page({
     index1: 0,
     type: ["不限类型","文学书籍", "理科书籍", "工科书籍", "社科书籍", "医学书籍", "其他书籍"],
     index2: 0,
+    datalist:[]
   },
-  inputBind:function(e){
+inputBind:function(e){
     this.setData({
       inputvalue: e.detail.value
     })
@@ -112,7 +113,23 @@ onReachBottom: function () {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.cloud.database().collection('homelist')
+    .get()
+    .then(res=>{
+      console.log("获取数据成功",res)
+      this.setData({
+        datalist:res.data
+      })
+    })
+    .catch(res=>{
+      console.log("获取数据失败",res)
+    })
+  },
+  gotodetail:function(e){
+    console.log("点击获取的数据",e)
+    wx.navigateTo({
+      url: '/pages/detail/detail?id='+e.currentTarget.dataset.item._id,
+    })
   },
 
   /**
