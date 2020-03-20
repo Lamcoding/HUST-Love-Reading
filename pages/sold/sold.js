@@ -55,7 +55,7 @@ showmodal:function(){
         //获取fileid
         var fileid = new Array()
         var book_id
-        console.log(tempFilePaths)
+       // console.log(tempFilePaths)
         var user = wx.getStorageSync('userinfo')
         tempFilePaths.forEach((item,index) => {
           wx.cloud.uploadFile({
@@ -76,14 +76,16 @@ showmodal:function(){
                   type: that.data.type[that.data.index2],
                   location: that.data.location[that.data.index1],
                   user_id: user['_id'],
+                  openid: user['openid']
                 }
               }).then(res => {
                 console.log("addbook返回", res.result._id)
                 wx.cloud.callFunction({
                   name: 'addbook_1',
                   data: {
-                    openid: user['openid'],
-                    book_id: res.result._id
+                    user_id: user['_id'],
+                    book_id: res.result._id,
+                    openid: user['openid']
                   }
                 }).then(res => {
                   console.log("addbook_1返回",res)
@@ -94,42 +96,6 @@ showmodal:function(){
             }
           })
         })
-  //       for(let i=0;i<tempFilePaths.length;i++){
-  //         wx.cloud.uploadFile({
-  //           cloudPath: 'Books_image/'+new Date().getTime()+user['openid']+'.png',
-  //           filePath:tempFilePaths[i],
-  //           complete:function(res){
-  //             fileid.push(res.fileID)
-  //            console.log("fileud",i)
-  //           }
-  //         })
-  //       }
-  //       console.log("?????",fileid)
-  //       wx.cloud.callFunction({
-  //         name: 'addbook',
-  //         data:{
-  //         file_id: [fileid],
-  //         name: that.data.title,
-  //         price:that.data.price,
-  //         note:that.data.summary,
-  //         type: that.data.type[that.data.index2],
-  //         location:that.data.location[that.data.index1],
-  //         user_id: user['_id']
-  //           /*sold.js：  wx.showModel success后需要传给后台数据（表明商品发布成功）
-	// 传入的商品数据有：chooseImg中的tempFilePaths
-	// 		detail.title
-	// 		detail.price
-  //     detail.summary
-	// 		location[index1]（也可只传入index1）
-	// 		type[index2](也可只传入index2)
-	// 		*/
-  //         },
-  //         success: function(res)
-  //         {
-  //           console.log(res)
-  //         }
-  //       })
-        
       }
       else if(res.cancel){
         console.log("用户点击取消");

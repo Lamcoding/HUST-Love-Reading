@@ -18,24 +18,6 @@ Page({
     if (info.detail.userInfo) {
       console.log("点击了同意授权");
       //调用pushuserinfo返回 _id，即数据库中的记录应用，以后请求数据时记得带上_id
-      wx.cloud.callFunction({
-        name: "pushuserinfo",
-        data: {
-          openid: info.detail.userInfo.openid,
-          avatarurl: info.detail.userInfo.avatarUrl,
-          nickname: info.detail.userInfo.nickName,
-          telephone: info.data.userInfo.telephone
-        },
-        success: function (res) {
-          var userinfo = {};
-          userinfo['_id'] = res.result._id;
-          userinfo['openid'] = info.detail.userInfo.openid;
-          userinfo['nickName'] = info.detail.userInfo.nickName;
-          userinfo['avatarUrl'] = info.detail.userInfo.avatarUrl;
-          wx.setStorageSync('userinfo', userinfo);
-          console.log("haha")
-        }
-      })
     } else {
       console.log("点击了拒绝授权");
     }
@@ -73,7 +55,7 @@ Page({
                   nickname: info.userInfo.nickName,
                 },
                 success: function (h) {
-                  console.log(h)
+                  console.log("pushuserinfo返回",h)
                   var userinfo = {};
                   userinfo['_id'] = h.result._id;
                   userinfo['openid'] = hh.result.openid;

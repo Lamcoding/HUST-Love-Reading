@@ -22,6 +22,7 @@ cloud.init("env: dinger-3lqz8")
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   const db= cloud.database()
+  const _ = db.command
   //books表插入新记录后返回的唯一标识_id
   try {
     return await db.collection('bookdata').add({
@@ -33,6 +34,7 @@ exports.main = async (event, context) => {
         status: "未售出",
         location: event.location,
         user_id: event.user_id,
+        _openid:event.openid,
       },
      success: function (res) {
        console.log(res)

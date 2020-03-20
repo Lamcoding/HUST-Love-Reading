@@ -6,7 +6,7 @@ exports.main = async (event, context) => {
     return await db.collection('users').add({
       // data 字段表示需新增的 JSON 数据
       data: {
-        openid:event.openid,
+        _openid:event.openid,
         avatarurl:event.avatarurl,
         nickname: event.nickname,
       }

@@ -1,4 +1,3 @@
-// 云函数入口文件
 const cloud = require('wx-server-sdk')
 
 // <<<<<<< HEAD
@@ -6,13 +5,15 @@ cloud.init("env: dinger-3lqz8")
 const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
-   t= await db.collection('users').where({
+  db.collection('users').where({
    openid:event.openid
-   }).get()
-  if( t != null )
-    return t
+   }).get().then( res =>{
+     if(res.data.length!=0)
+     return res
+   })
+ 
   try {
-    return await db.collection("users").add({
+    return  await db.collection("users").add({
       data: {
         openid:event.openid,
         avatarurl:event.avatarurl,
