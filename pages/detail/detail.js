@@ -98,8 +98,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad:function(options) {
-    ID = options.id
-    console.log(ID)
+    ID = options.id.trim()
+    console.log(ID.trim())
     wx.cloud.database().collection('bookdata')
       .doc(ID)
       .get()

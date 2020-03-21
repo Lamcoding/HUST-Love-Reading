@@ -11,7 +11,7 @@
   <view class="goods">
     <view class="left">
       <view class="Title">{{detail.name}}</view>
-      <view class="Summary">{{detail.note}}</view>
+      <view class="Summary">备注:{{detail.note}}</view>
       <view class="Price">￥{{detail.price}}</view>
     </view>
     <view class="right">
@@ -19,8 +19,8 @@
       <text>收藏</text>
     </view>
     <view class="user">
-      <image src="{{searchuser.searchavatar(item.userid,userlist)}}"></image>
-      <view class="Userid">{{searchuser.searchname(item.userid,userlist)}}</view>
+      <image src="{{searchuser.searchavatar(detail.userid,userlist)}}"></image>
+      <view class="Userid">{{searchuser.searchname(detail.userid,userlist)}}</view>
       <view class="Userlocation">{{detail.location}}</view>
     </view>
   </view>
