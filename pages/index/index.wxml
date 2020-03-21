@@ -1,0 +1,12 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  <view class="title">校内交换散置书籍</view>
+  <swiper class="login" indicator-dots="true" auto-play="true" interval="5000" duration="500">
+   <block wx:for="{{swiperImg}}" wx:key="swiperindex">
+    <swiper-item>
+      <image src="{{item}}"></image>
+    </swiper-item>
+   </block>
+  </swiper>
+  <button class="login_button" open-type="getUserInfo" bindgetuserinfo="getMyInfo" bindtap="gotoHome">授权登录</button>
+</view>

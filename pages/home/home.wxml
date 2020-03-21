@@ -1,0 +1,54 @@
+<!--pages/home/home.wxml-->
+<wxs module="searchuser" src="../../utils/searchuser.wxs"></wxs>
+<view class="container">
+  <view class="top">
+    <view class="search">
+      <input type="text" placeholder="搜索书籍" confirm-type="search" value="{{inputvalue}}" bindinput="inputBind" bindconfirm="push" />
+      <image class="searchImg" src="/images/search.png"></image>
+    </view>
+    <view class="select">
+      <view class="left_select">
+        <view class="explain"> 类别</view>
+        <picker mode="selector" range="{{type}}" value="{{index2}}" bindchange="updateType">
+          <text>{{type[index2]}}</text>
+        </picker>
+      </view>
+      <view class="right_select">
+        <view class="explain"> 地址</view>
+        <picker mode="selector" range="{{location}}" value="{{index1}}" bindchange="updateLocation">
+          <text>{{location[index1]}}</text>
+        </picker>
+      </view>
+    </view>
+  </view>
+  <view class="empty"></view>
+  <view style="display:none">
+    <image class="imgBox " bindload="imgLoad" wx:for="{{imgList}}" wx:key="index" mode="widthFix" data-url="{{item}}" data-index="{{index}}" src='{{item}}'></image>
+  </view>
+  <view class="box">
+    <view class="imgBox" wx:for="{{dataLeft}}" wx:key="index" bindtap="gotodetail" data-item="{{item}}">
+      <image mode="widthFix" src='{{item.file_id}}'></image>
+      <view class="ziti">{{item.name}}</view>
+      <view class="beizhu">备注:{{item.note}}</view>
+      <view class="price">￥{{item.price}}</view>
+      <view class="user">
+        <image src="{{searchuser.searchavatar(item.userid,userlist)}}"></image>
+        <text>{{searchuser.searchname(item.userid,userlist)}}</text>
+        <view class="didian">{{item.location}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="box">
+    <view class="imgBox" wx:for="{{dataRight}}" wx:key="index" bindtap="gotodetail" data-item="{{item}}">
+      <image mode="widthFix" src='{{item.file_id}}'></image>
+      <view class="ziti">{{item.name}}</view>
+      <view class="beizhu">备注:{{item.note}}</view>
+      <view class="price">￥{{item.price}}</view>
+       <view class="user">
+        <image src="{{searchuser.searchavatar(item.userid,userlist)}}"></image>
+        <text>{{searchuser.searchname(item.userid,userlist)}}</text>
+        <view class="didian">{{item.location}}</view>
+      </view>
+    </view>
+  </view>
+</view>

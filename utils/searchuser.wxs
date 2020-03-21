@@ -1,0 +1,28 @@
+var searchuser={
+  searchavatar:function(value,users){
+    for(var i=0;i<users.length;i++){
+      if(value==users[i].id){
+        return 'cloud://dinger-3lqz8.6469-dinger-3lqz8-1301576510/Users_image/head_portrait/'+ users[i].id+'.jpg'
+      }
+    }
+  },
+  searchname:function(value,users){
+    for(var i=0;i<users.length;i++){
+      if(value==users[i].id){
+        return users[i].name
+      }
+    }
+  },
+  // searchlocation: function (value, users) {
+  //   for (var i = 0; i < users.length; i++) {
+  //     if (value == users[i].id) {
+  //       return users[i].
+  //     }
+  //   }
+  // }
+}
+module.exports={
+  searchavatar:searchuser.searchavatar,
+  searchname:searchuser.searchname,
+  // searchlocation:searchuser.searchlocation
+}

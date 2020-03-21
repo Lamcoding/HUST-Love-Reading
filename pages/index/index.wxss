@@ -1,0 +1,26 @@
+/* pages/index/index.wxss */
+.container{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+}
+.title{
+  color: #4A7053;
+}
+swiper{
+  width: 70%;
+  height: 85%;
+}
+swiper image{
+  height: 100%;
+  width: 100%;
+}
+button{
+  width: 50%;
+  background-color:#2e86de;
+  color: #ffffff;
+}
