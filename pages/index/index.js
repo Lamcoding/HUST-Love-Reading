@@ -41,34 +41,48 @@ Page({
        //console.log(info);
         if (info.userInfo) {
           console.log("点击了同意授权");
+          var userinfo = {};
           //调用pushuserinfo返回 _id，即数据库中的记录应用，以后请求数据时记得带上_id
           wx.cloud.callFunction({
             name: "getopenid",
             success: function (res) {
               let hh = res
               console.log("getopenid返回",hh)
-              wx.cloud.callFunction({
-                name: "pushuserinfo",
-                data: {
-                  openid: res.result.openid,
-                  avatarurl: info.userInfo.avatarUrl,
-                  nickname: info.userInfo.nickName,
-                },
-                success: function (h) {
-                  console.log("pushuserinfo返回",h)
-                  var userinfo = {};
-                  userinfo['_id'] = h.result._id;
-                  userinfo['openid'] = hh.result.openid;
-                  userinfo['nickName'] = info.userInfo.nickName;
-                  userinfo['avatarUrl'] = info.userInfo.avatarUrl;
-                  wx.setStorageSync('userinfo', userinfo);
-                  console.log("userinfo缓存",userinfo);
-                },
-              })
               
+              userinfo['nickName'] = info.userInfo.nickName;
+              userinfo['avatarUrl'] = info.userInfo.avatarUrl;
+              userinfo['openid'] = hh.result.openid;
+              wx.cloud.callFunction({
+                name:'getuserinfo',
+                data:{
+                  openid:hh.result.openid
+                },
+                success:function(useless){
+                  console.log("getuserinfo返回",useless)
+                  if(useless.result.data.length == 0){
+                  wx.cloud.callFunction({
+                    name: "pushuserinfo",
+                    data: {
+                      openid: hh.result.openid,
+                      avatarurl: info.userInfo.avatarUrl,
+                      nickname: info.userInfo.nickName,
+                    },
+                    success: function (h) {
+                      console.log("pushuserinfo返回", h)
+                      userinfo['_id'] = h.result._id;
+                      wx.setStorageSync('userinfo', userinfo);
+                      console.log("user_id", userinfo['_id'])
+                    },
+                  })}
+                  else{
+                    userinfo['_id'] = useless.result.data[0]._id;
+                    wx.setStorageSync('userinfo', userinfo);
+                  }
+                 
+                }
+              })
             }
           })
-
         } else {
           console.log("点击了拒绝授权");
         }

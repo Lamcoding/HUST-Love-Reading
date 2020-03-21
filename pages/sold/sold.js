@@ -6,12 +6,28 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title:0,
-    price:0,
+    summary:'',
+    title:'',
+    price:'',
     location:["沁苑公寓","韵苑公寓","紫菘公寓"],
     index1:0,
     type: ["文学书籍","理科书籍","工科书籍","社科书籍","医学书籍","其他书籍"],
     index2:0,
+  },
+  bindTitle:function(e){
+    this.setData({
+      title:e.detail.value
+    })
+  },
+  bindPrice: function (e) {
+    this.setData({
+      price: e.detail.value
+    })
+  },
+  bindSummary: function (e) {
+    this.setData({
+      summary: e.detail.value
+    })
   },
   chooseImg:function(){
     wx.chooseImage({
@@ -57,6 +73,7 @@ showmodal:function(){
         var book_id
        // console.log(tempFilePaths)
         var user = wx.getStorageSync('userinfo')
+        console.log(user)
         tempFilePaths.forEach((item,index) => {
           wx.cloud.uploadFile({
             cloudPath: 'Books_image/' + new Date().getTime() + user['openid'] + index + '.png',
@@ -79,13 +96,13 @@ showmodal:function(){
                   openid: user['openid']
                 }
               }).then(res => {
-                console.log("addbook返回", res.result._id)
+                console.log("addbook返回", user)
                 wx.cloud.callFunction({
                   name: 'addbook_1',
                   data: {
                     user_id: user['_id'],
                     book_id: res.result._id,
-                    openid: user['openid']
+                  //  openid: user['openid']
                   }
                 }).then(res => {
                   console.log("addbook_1返回",res)

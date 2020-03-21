@@ -7,10 +7,11 @@ cloud.init("env: dinger-3lqz8")
 exports.main = async (event, context) => {
   const db = cloud.database()
   const _ = db.command
+  let t ={}
   try{
-  return await db.collection('users').doc(event.user_id).update({
+   t= await db.collection('users').doc(event.user_id).update({
     data: {
-      book_id: _.push(event.book_id)
+      book_id: _.addToSet(event.book_id)
     },
     success: function (res) {
       console.log(res)
@@ -21,6 +22,7 @@ exports.main = async (event, context) => {
   })
   }catch(e)
   {
-
+    t = e
   }
+  return t
 }

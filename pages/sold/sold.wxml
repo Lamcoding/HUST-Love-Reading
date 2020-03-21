@@ -8,11 +8,11 @@
   </view>
   <view class="title">
     <text>书名</text>
-    <input class="ti" placeholder="请输入书籍名称" value="{{title}}"></input>
+    <input class="ti" placeholder="请输入书籍名称" bindinput="bindTitle" value="{{title}}"></input>
   </view>
   <view class="price">
     <text>价格</text>
-    <input class="pri" placeholder="请输入价格" value="{{price}}"></input>
+    <input class="pri" placeholder="请输入价格" bindinput="bindPrice"value="{{price}}"></input>
   </view>
   <view class="Selector">
     <view class="select" id="select1">
@@ -30,7 +30,7 @@
   </view>
   <view class="Summary">
     <text>备注:</text>
-    <textarea class="sum" placeholder="可输入备注信息（不超过二十个字）" maxlength="21" value="{{detail.summary}}"></textarea>
+    <textarea id="sum" placeholder="可输入备注信息（不超过二十个字" bindblur="bindSummary"maxlength="21" value="{{summary}}"></textarea>
   </view>
   <button bindtap="showmodal">确认信息</button>
 </view>

@@ -31,10 +31,11 @@ exports.main = async (event, context) => {
         name: event.name,
         type: event.type,
         price: event.price,
+        summary:event.note,
         status: "未售出",
         location: event.location,
         user_id: event.user_id,
-        _openid:event.openid,
+        openid:event.openid,
       },
      success: function (res) {
        console.log(res)
