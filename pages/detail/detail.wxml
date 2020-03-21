@@ -1,26 +1,27 @@
 <!--pages/detail/detail.wxml-->
+<wxs module="searchuser" src="../../utils/searchuser.wxs"></wxs>
 <view class="container">
   <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
-    <block wx:for="{{goods_info.picture}}">
+    <block wx:for="{{detail.file_id}}">
       <swiper-item>
-        <image src="{{item.img}}" mode='scaleToFill' class="slide-image" />
+        <image src="{{item}}" mode='scaleToFill' class="slide-image" />
       </swiper-item>
     </block>
   </swiper>
   <view class="goods">
     <view class="left">
-      <view class="Title">{{goods_info.title}}</view>
-      <view class="Summary">{{goods_info.summary}}</view>
-      <view class="Price">￥{{goods_info.price}}</view>
+      <view class="Title">{{detail.name}}</view>
+      <view class="Summary">{{detail.note}}</view>
+      <view class="Price">￥{{detail.price}}</view>
     </view>
     <view class="right">
       <image bindtap="favorite" src="{{favoriteimg}}"></image>
       <text>收藏</text>
     </view>
     <view class="user">
-      <image src="{{goods_info.userava}}"></image>
-      <view class="Userid">{{goods_info.userid}}</view>
-      <view class="Userlocation">{{goods_info.userlocation}}</view>
+      <image src="{{searchuser.searchavatar(item.userid,userlist)}}"></image>
+      <view class="Userid">{{searchuser.searchname(item.userid,userlist)}}</view>
+      <view class="Userlocation">{{detail.location}}</view>
     </view>
   </view>
   <view class="line"></view>
