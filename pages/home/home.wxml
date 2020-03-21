@@ -1,4 +1,5 @@
 <!--pages/home/home.wxml-->
+<wxs module="searchuser" src="../../utils/searchuser.wxs"></wxs>
 <view class="container">
   <view class="top">
     <view class="search">
@@ -21,8 +22,33 @@
     </view>
   </view>
   <view class="empty"></view>
-  <view class="itemroot" wx:for="{{datalist}}" wx:key="index1" bindtap="gotodetail" data-item="{{item}}">
-    <text>{{item.title}}</text>
-    <text>{{item.des}}</text>
+  <view style="display:none">
+    <image class="imgBox " bindload="imgLoad" wx:for="{{imgList}}" wx:key="index" mode="widthFix" data-url="{{item}}" data-index="{{index}}" src='{{item}}'></image>
+  </view>
+  <view class="box">
+    <view class="imgBox" wx:for="{{dataLeft}}" wx:key="index" bindtap="gotodetail" data-item="{{item}}">
+      <image mode="widthFix" src='{{item.file_id}}'></image>
+      <view class="ziti">{{item.name}}</view>
+      <view class="beizhu">备注:{{item.note}}</view>
+      <view class="price">￥{{item.price}}</view>
+      <view class="user">
+        <image src="{{searchuser.searchavatar(item.userid,userlist)}}"></image>
+        <text>{{searchuser.searchname(item.userid,userlist)}}</text>
+        <view class="didian">{{item.location}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="box">
+    <view class="imgBox" wx:for="{{dataRight}}" wx:key="index" bindtap="gotodetail" data-item="{{item}}">
+      <image mode="widthFix" src='{{item.file_id}}'></image>
+      <view class="ziti">{{item.name}}</view>
+      <view class="beizhu">备注:{{item.note}}</view>
+      <view class="price">￥{{item.price}}</view>
+       <view class="user">
+        <image src="{{searchuser.searchavatar(item.userid,userlist)}}"></image>
+        <text>{{searchuser.searchname(item.userid,userlist)}}</text>
+        <view class="didian">{{item.location}}</view>
+      </view>
+    </view>
   </view>
 </view>
